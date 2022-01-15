@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const getAllTalkers = require('./middleware/getAllTalkers');
 const error = require('./middleware/error');
+const getTalkerById = require('./middleware/getTalkerById');
 
 const app = express();
 app.use(bodyParser.json());
@@ -22,18 +23,7 @@ app.get('/talker', getAllTalkers);
 //----------------
 
 // requisito 02
-app.get('/talker/:id', async (req, res, _next) => {
-  const response = await getTalk();
-
-  const { id } = req.params;
-  const peopleInfo = response.find((people) => people.id === +id);
-  if (!peopleInfo) {
-    return res.status(404).json({
-    message: 'Pessoa palestrante não encontrada',
-    });
-  }
-  return res.status(200).json(peopleInfo);
-});
+app.get('/talker/:id', getTalkerById);
 
 //----------------
 // requisito 03
