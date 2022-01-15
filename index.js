@@ -24,7 +24,18 @@ app.get('/talker', async (_req, res, _next) => {
 //----------------
 
 // requisito 02
+app.get('/talker/:id', async (req, res, _next) => {
+  const response = await getTalk();
 
+  const { id } = req.params;
+  const peopleInfo = response.find((people) => people.id === +id);
+  if (!peopleInfo) {
+    return res.status(404).json({
+    message: 'Pessoa palestrante não encontrada',
+    });
+  }
+  return res.status(200).json(peopleInfo);
+});
 
 //----------------
 
