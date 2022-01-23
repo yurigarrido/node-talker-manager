@@ -16,6 +16,7 @@ const validateWatchedAt = require('./middleware/validateWatchedAt');
 const registerTalker = require('./middleware/registerTalker');
 const editTalker = require('./middleware/editTalker');
 const deleteTalker = require('./middleware/deleteTalker');
+const searchTerm = require('./middleware/searchTerm');
 
 const app = express();
 app.use(bodyParser.json());
@@ -30,6 +31,11 @@ app.get('/', (_request, response) => {
 
 // requisito 01
 app.get('/talker', getAllTalkers);
+
+// requisito 07
+app.get('/talker/search',
+validateToken,
+searchTerm);
 
 // requisito 02
 app.get('/talker/:id', getTalkerById);
