@@ -15,6 +15,7 @@ const validateRate = require('./middleware/validateRate');
 const validateWatchedAt = require('./middleware/validateWatchedAt');
 const registerTalker = require('./middleware/registerTalker');
 const editTalker = require('./middleware/editTalker');
+const deleteTalker = require('./middleware/deleteTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -57,6 +58,11 @@ validateRate,
 validateWatchedAt,
 
 editTalker);
+
+// requisito 06
+app.delete('/talker/:id',
+validateToken,
+deleteTalker);
 
 // captura os erros
 app.use(error);
