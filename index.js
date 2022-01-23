@@ -7,6 +7,13 @@ const getTalkerById = require('./middleware/getTalkerById');
 const validatePassword = require('./middleware/validatePassword');
 const validateLogin = require('./middleware/validateLogin');
 const validateEmail = require('./middleware/validateEmail');
+const validateToken = require('./middleware/validateToken');
+const validateName = require('./middleware/validateName');
+const validateAge = require('./middleware/validateAge');
+const validateTalk = require('./middleware/validateTalk');
+const validateRate = require('./middleware/validateRate');
+const validateWatchedAt = require('./middleware/validateWatchedAt');
+const registerTalker = require('./middleware/registerTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,6 +34,16 @@ app.get('/talker/:id', getTalkerById);
 
 // requisito 03
 app.post('/login', validateEmail, validatePassword, validateLogin);
+
+// requisito 04
+app.post('/talker',
+validateToken,
+validateName,
+validateAge,
+validateTalk,
+validateRate,
+validateWatchedAt,
+registerTalker);
 
 // captura os erros
 app.use(error);
